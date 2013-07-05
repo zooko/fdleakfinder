@@ -1,0 +1,6 @@
+include COPYING.SPL.txt README.rst
+include MANIFEST.in
+include versioneer.py
+include setup.py
+
+graft fdleakfinder
