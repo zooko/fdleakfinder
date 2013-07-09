@@ -140,5 +140,8 @@ def main():
     print "--- high water mark: ", len(high_water_mark)
     pprint.pprint(high_water_mark)
 
+    print "\n--- at the end: ", len(openfiles)
+    pprint.pprint(openfiles)
+
 if __name__ == '__main__':
     main()
