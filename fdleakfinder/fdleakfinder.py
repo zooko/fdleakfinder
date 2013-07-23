@@ -1,5 +1,7 @@
 import copy, pprint, re, sys
 
+from pyutil import dictutil
+
 def main():
     verbose = False
     if ('-v' in sys.argv) or ('--verbose' in sys.argv):
@@ -80,6 +82,7 @@ def main():
 
 
     openfiles = {} # k: fd, v: (fname, inl)
+    openedfiles = dictutil.NumDict() # k: fname, v: times opened
 
     high_water_mark = None
 
@@ -98,6 +101,7 @@ def main():
                     raise
                 assert not openfiles.has_key(fd), (fd, fname, inl, openfiles[fd])
                 openfiles[fd] = (fname, inl)
+                openedfiles.inc(fname)
 
                 if verbose:
                     print "++ %d=>%s okay now there are %d, %s" % (fd, fname, len(openfiles), inl)
@@ -142,6 +146,9 @@ def main():
 
     print "\n--- at the end: ", len(openfiles)
     pprint.pprint(openfiles)
+
+    print "\n--- opened files: ", len(openedfiles)
+    pprint.pprint(openedfiles.items_sorted_by_value())
 
 if __name__ == '__main__':
     main()

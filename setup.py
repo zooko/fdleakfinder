@@ -63,4 +63,5 @@ setup(name=PKG,
               ] },
       test_suite=PKG+".test",
       zip_safe=False, # I prefer unzipped for easier access.
+      install_requires=['pyutil'],
       )
